@@ -224,9 +224,14 @@ const Select = createClass({
 
 		const valueArray = this.getValueArray(nextProps.value, nextProps);
 
-    if (!nextProps.isOpen && this.props.isOpen) {
-      this.closeMenu();
-    }
+		if (nextProps.isOpen !== this.props.isOpen) {
+			this.setState({
+				isOpen: nextProps.isOpen
+			});
+			if (!nextProps.isOpen) {
+				this.closeMenu();
+			}
+		}
 
 		if (nextProps.required) {
 			this.setState({
@@ -772,6 +777,7 @@ const Select = createClass({
 				inputValue: '',
 				focusedOption: this._focusedOption || (options.length ? options[dir === 'next' ? 0 : options.length - 1].option : null)
 			});
+
 			return;
 		}
 		if (!options.length) return;

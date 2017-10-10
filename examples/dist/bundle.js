@@ -1826,7 +1826,7 @@ var Select = (0, _createReactClass2['default'])({
 				return;
 			case 13:
 				// enter
-				if (!this.state.isOpen) return;
+				if (!this.state.isOpen && !this.props.isOpen) return;
 				event.stopPropagation();
 				this.selectFocusedOption();
 				break;
@@ -2097,12 +2097,13 @@ var Select = (0, _createReactClass2['default'])({
 			return !option.option.disabled;
 		});
 		this._scrollToFocusedOptionOnUpdate = true;
-		if (!this.state.isOpen) {
+		if (!this.state.isOpen && !this.props.isOpen) {
 			this.setState({
 				isOpen: true,
 				inputValue: '',
 				focusedOption: this._focusedOption || (options.length ? options[dir === 'next' ? 0 : options.length - 1].option : null)
 			});
+
 			return;
 		}
 		if (!options.length) return;
